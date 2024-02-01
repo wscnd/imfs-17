@@ -2,7 +2,13 @@
   "name": "@nx-imfs-17/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "nx run-many --target serve --projects=api-orders --parallel --nx-bail=true --maxParallel=100",
+    "dev:api": "docker compose --profile apis up -d",
+    "dev:api:stop": "docker compose -f docker-compose.yaml --profile apis down",
+    "fixture:insert": "tsm apps/api-orders/src/db_fixture_insert.ts",
+    "fixture:create": "tsm apps/api-orders/src/db_fixture_create.ts"
+  },
   "private": true,
   "devDependencies": {
     "@nestjs/schematics": "^10.0.1",
@@ -34,6 +40,8 @@
     "react-refresh": "^0.10.0",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "tsm": "^2.3.0",
     "typescript": "~5.3.2",
     "url-loader": "^4.1.1"
   },
@@ -49,6 +57,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "express": "^4.18.2",
+    "mysql2": "^3.9.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0",
