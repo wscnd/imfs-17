@@ -14,7 +14,7 @@
         "outputPath": "dist/apps/api-orders",
         "main": "apps/api-orders/src/main.ts",
         "tsConfig": "apps/api-orders/tsconfig.app.json",
-        "assets": ["apps/api-orders/src/assets"],
+        // "assets": ["apps/api-orders/src/assets"],
         "webpackConfig": "apps/api-orders/webpack.config.js"
       },
       "configurations": {
