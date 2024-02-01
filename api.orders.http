@@ -1,0 +1,74 @@
+@host = http://localhost:3000
+@bearer_token = Bearer {{auth_login.response.body.$.token}}
+
+# @name auth_login
+POST {{host}}/auth/login HTTP/1.1
+Host: localhost:3030
+Authorization: {{bearer_token}}
+Content-Type: application/json
+
+{
+  "username": "user2",
+  "password": "user2"
+}
+
+###
+# @name auth_me
+GET {{host}}/auth/me HTTP/1.1
+Authorization: {{bearer_token}}
+
+###
+# @name order_create
+POST {{host}}/order HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Authorization: {{bearer_token}}
+
+{
+  "items": [
+    {
+      "product_id": "0192e956-7794-44b2-842c-60b249716e73",
+      "quantity": 1
+    },
+    {
+      "product_id": "c86e4d6a-6548-44fd-b293-4689693d275d",
+      "quantity": 1
+    }
+  ],
+  "card_hash": "321321"
+}
+
+###
+# @name order_find_all
+GET {{host}}/order
+Authorization: {{bearer_token}}
+
+###
+# @name order_find_by_id
+@order_id = {{order_find_all.response.body.$[0].id}}
+GET {{host}}/order/{{order_id}}
+Authorization: {{bearer_token}}
+
+
+###
+# @name product_create
+# @prompt productName
+POST {{host}}/product HTTP/1.1
+  Host: localhost:3000
+Content-Type: application/json
+
+{
+  "name": "Product {{productName}}",
+  "image_url": "https://via.placeholder.com/150",
+  "description": "{{productName}} description",
+  "price": 12313
+}
+
+###
+# @name product_find_many
+@product_id = {{product_find_many.response.body.$[0].id}}
+GET {{host}}/product
+
+###
+# @name product_find_by_id
+GET {{host}}/product/{{product_id}}
