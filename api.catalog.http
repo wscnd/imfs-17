@@ -1,0 +1,53 @@
+
+@host = http://localhost:8080
+###
+# @name category_create
+# @prompt categoryname
+POST {{host}}/category HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "name": "{{categoryname}}"
+}
+
+###
+# @name category_find_all
+@created_category_id = {{category_find_all.response.body.$[0].id}}
+GET {{host}}/category
+
+###
+# @name category_find_by_id
+GET {{host}}/category/{{created_category_id}}
+
+###
+# @name product_create
+POST {{host}}/product HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+	"name"       : "Product Name",
+	"description": "Product Description",
+	"price"      : 100,
+	"category_id":  "{{created_category_id}}",
+	"image_url"  :  "very_nice_url_from_product2"
+}
+
+###
+# @name product_find_all
+@created_category_id = {{product_find_all.response.body.$[0].id}}
+GET {{host}}/product
+
+###
+@product_id = {{category_find_all.response.body.$[0].id}}
+# @name product_find_by_id
+GET {{host}}/product/{{product_id}}
+
+###
+# @name product_get_by_category_id
+GET {{host}}/product/category/{{created_category_id}}
+
+
+
+

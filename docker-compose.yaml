@@ -1,12 +1,25 @@
 version: "3"
 
 services:
-  product_db_dev:
+  catalog_api:
     image: mysql:latest
+    container_name: catalog_mysql_db
     profiles: [apis]
-    container_name: mysql_dev
     ports:
       - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=catalog_db
+    volumes:
+      - .docker/api_catalog:/var/lib/mysql
+      - ./apps/api-catalog/db.sql:/docker-entrypoint-initdb.d/db.sql
+    restart: always
+
+  order_api:
+    image: mysql:latest
+    container_name: order_mysql_db
+    ports:
+      - 3307:3306
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=product_db_dev
