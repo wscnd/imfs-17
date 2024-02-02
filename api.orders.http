@@ -26,11 +26,11 @@ Authorization: {{bearer_token}}
 {
   "items": [
     {
-      "product_id": "0192e956-7794-44b2-842c-60b249716e73",
+      "product_id": "16a7a804-de05-433d-b54c-cbcb9170d118",
       "quantity": 1
     },
     {
-      "product_id": "c86e4d6a-6548-44fd-b293-4689693d275d",
+      "product_id": "1d269781-689e-45d6-878f-177ab6bdf99e",
       "quantity": 1
     }
   ],
