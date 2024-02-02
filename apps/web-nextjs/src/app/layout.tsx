@@ -1,22 +1,20 @@
-import { Box, ThemeProvider } from "@mui/material";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Navbar } from "../components/Navbar/Navbar";
-import theme from "../theme";
+import { Box, ThemeProvider } from '@mui/material';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { Navbar } from '../components/Navbar/Navbar';
+import theme from '../theme';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Code Commerce",
-  description: "FullCycle Shop",
+  title: 'Code Commerce',
+  description: 'FullCycle Shop',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -28,8 +26,8 @@ export default function RootLayout({
                 component="main"
                 sx={{
                   flexGrow: 1,
-                  bgcolor: "background.default",
-                  mt: ["122px", "135px", "146px"],
+                  bgcolor: 'background.default',
+                  mt: ['122px', '135px', '146px'],
                   p: 3,
                 }}
               >

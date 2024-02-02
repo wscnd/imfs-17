@@ -7,7 +7,7 @@
     "serve:images": "pnpm dlx serve -l 9000 ./apps/web-nextjs/images",
     "api:up": "docker compose -f docker-compose.yaml --profile apis up -d",
     "api:down": "docker compose -f docker-compose.yaml --profile apis down",
-    "lint": "nx affected --target=lint",
+    "lint": "nx affected --target=lint --fix",
     "fixture:insert": "ts-node --project ./apps/api-orders/tsconfig.bootstrap.json -r tsconfig-paths/register \"./apps/api-orders/src/db_fixture_insert.ts\"",
     "fixture:create": "ts-node --project ./apps/api-orders/tsconfig.bootstrap.json -r tsconfig-paths/register \"./apps/api-orders/src/db_fixture_create.ts\"",
     "wire": "wire ./apps/api-catalog/... "
@@ -15,6 +15,7 @@
   "private": true,
   "devDependencies": {
     "@golevelup/nestjs-rabbitmq": "^4.1.0",
+    "@mui/joy": "5.0.0-beta.25",
     "@nestjs/cli": "^10.3.0",
     "@nestjs/common": "^10.3.1",
     "@nestjs/schematics": "^10.1.0",
@@ -44,6 +45,7 @@
     "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
+    "Option": "link:@mui/joy/Option",
     "babel-jest": "^29.7.0",
     "cypress": "^13.6.4",
     "eslint": "~8.48.0",
@@ -92,6 +94,7 @@
     "material-nextjs": "link:@mui/material-nextjs",
     "mysql2": "^3.9.1",
     "next": "14.0.4",
+    "nuqs": "^1.16.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.50.0",

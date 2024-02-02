@@ -15,7 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nx-imfs-17/shared/types": ["libs/shared/types/src/index.ts"]
+      "@nx-imfs-17/shared/types": [
+        "libs/shared/types/src/index.ts"
+      ],
+      "@nx-imfs-17/web-nextjs/*": [
+        "apps/web-nextjs/src/*"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
