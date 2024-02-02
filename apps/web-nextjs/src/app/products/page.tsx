@@ -1,4 +1,4 @@
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   Box,
   Button,
@@ -6,44 +6,19 @@ import {
   CardActions,
   CardContent,
   Typography,
-} from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import Image from "next/legacy/image";
-import Link from "next/link";
-import { TProduct } from "@nx-imfs-17/shared/types";
+} from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import Image from 'next/legacy/image';
+import Link from 'next/link';
+import { getProducts } from '../../utils/products';
 
-const products: Array<TProduct> = [
-  {
-    id: "1",
-    name: "Produto 1",
-    description: "Descrição do produto 1",
-    price: 100,
-    image_url: "https://source.unsplash.com/random?product",
-    category_id: "1",
-  },
-  {
-    id: "2",
-    name: "Produto 2",
-    description: "Descrição do produto 2",
-    price: 100,
-    image_url: "https://source.unsplash.com/random?product",
-    category_id: "2",
-  },
-  {
-    id: "3",
-    name: "Produto 3",
-    description: "Descrição do produto 3",
-    price: 100,
-    image_url: "https://source.unsplash.com/random?product",
-    category_id: "3",
-  },
-];
+async function ListProductsPage() {
+  const products = await getProducts();
 
-function ListProductsPage() {
   return (
     <Grid2 container spacing={2}>
       {products.length === 0 && (
-        <Grid2 xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid2 xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
           <Typography variant="h5">Nenhum produto encontrado</Typography>
         </Grid2>
       )}
@@ -51,21 +26,24 @@ function ListProductsPage() {
         <Grid2 xs={12} sm={6} md={4} key={key}>
           <Card
             sx={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
             }}
           >
             <Box
               sx={{
-                position: "relative",
-                width: "100%",
+                position: 'relative',
+                width: '100%',
                 height: 0,
-                paddingTop: "56.25%",
+                paddingTop: '56.25%',
               }}
             >
-              <Link href={`/products/${product.id}`} style={{ textDecoration: "none" }}>
+              <Link
+                href={`/products/${product.id}`}
+                style={{ textDecoration: 'none' }}
+              >
                 <Image
                   src={product.image_url}
                   alt={product.name}
@@ -82,19 +60,19 @@ function ListProductsPage() {
               </Typography>
               <Typography
                 sx={{
-                  color: "primary.main",
+                  color: 'primary.main',
                 }}
               >
-                {new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
+                {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
                 }).format(product.price)}
               </Typography>
             </CardContent>
-            <CardActions sx={{ display: "flex", justifyContent: "end", mt: 2 }}>
+            <CardActions sx={{ display: 'flex', justifyContent: 'end', mt: 2 }}>
               <Link
                 href={`/products/${product.id}`}
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: 'none' }}
               >
                 <Button size="small" startIcon={<ShoppingCartIcon />}>
                   Comprar
