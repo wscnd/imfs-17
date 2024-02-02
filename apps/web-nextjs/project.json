@@ -36,6 +36,12 @@
         }
       }
     },
+    "serve:images": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "serve:images"
+      }
+    },
     "export": {
       "executor": "@nx/next:export",
       "options": {
