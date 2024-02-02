@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { FormControl, MenuItem, Select } from "@mui/material";
-import { grey } from "@mui/material/colors";
-import { Category } from "../../models";
+import { FormControl, MenuItem, Select } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import { TCategory } from '@nx-imfs-17/shared/types';
 
 type SelectCategoryProps = {
-  categories?: Array<Category>
+  categories?: Array<TCategory>;
 };
 
 export function SelectCategory({ categories }: SelectCategoryProps) {
@@ -15,7 +15,9 @@ export function SelectCategory({ categories }: SelectCategoryProps) {
         className="select-category"
         name="select-category"
         sx={{ backgroundColor: grey[400] }}
-        onChange={(event) => {}}
+        onChange={(event) => {
+          return 'ok';
+        }}
       >
         <MenuItem value="0">Todas as categorias</MenuItem>
         {categories?.map((category) => (

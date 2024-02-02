@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Total } from "../../../components/Total";
-import { Product } from "../../../models";
+import { TProduct } from "@nx-imfs-17/shared/types";
 
 const productFormSchema = z.object({
   product_id: z.string().uuid(),
@@ -16,7 +16,7 @@ const productFormSchema = z.object({
 type ProductFormValues = z.infer<typeof productFormSchema>;
 
 type ProductQuantityFormProps = {
-  product: Product;
+  product: TProduct;
 };
 export function ProductQuantityForm({ product }: ProductQuantityFormProps) {
   const { control, register, getValues, watch } = useForm<ProductFormValues>({

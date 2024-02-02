@@ -225,6 +225,9 @@ importers:
       jest-environment-node:
         specifier: ^29.7.0
         version: 29.7.0
+      node:library:
+        specifier: link:@nx/node:library
+        version: link:@nx/node:library
       nx:
         specifier: 17.3.1
         version: 17.3.1(@swc-node/register@1.6.8)(@swc/core@1.3.107)

@@ -1,9 +1,9 @@
-export type Category = {
+export type TCategory = {
 	id: number;
 	name: string;
 };
 
-export type Product = {
+export type TProduct = {
 	id: string;
 	name: string;
 	description: string;
@@ -12,23 +12,23 @@ export type Product = {
 	category_id: string;
 };
 
-export enum OrderStatus {
+export enum EOrderStatus {
 	PENDING = "pending",
 	PAID = "paid",
 	FAILED = "failed",
 }
 
-export type Order = {
+export type TOrder = {
 	id: string;
 	total: number;
-	status: OrderStatus;
-	items: Array<OrderCartItem>;
+	status: EOrderStatus;
+	items: Array<TOrderCartItem>;
 	created_at: string;
 };
 
-export type OrderCartItem = {
+export type TOrderCartItem = {
 	id: number;
 	quantity: number;
 	price: number;
-	product: Product;
+	product: TProduct;
 };

@@ -3,10 +3,10 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import Image from "next/legacy/image";
-import { Product } from "../../../models";
+import { TProduct } from "@nx-imfs-17/shared/types";
 import { ProductQuantityForm } from "./ProductQuantityForm";
 
-const product: Product = {
+const product: TProduct = {
   id: "1",
   name: "Camisa",
   description: "Camisa branca",

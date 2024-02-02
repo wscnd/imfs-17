@@ -10,9 +10,9 @@ import {
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import { Product } from "../../models";
+import { TProduct } from "@nx-imfs-17/shared/types";
 
-const products: Array<Product> = [
+const products: Array<TProduct> = [
   {
     id: "1",
     name: "Produto 1",

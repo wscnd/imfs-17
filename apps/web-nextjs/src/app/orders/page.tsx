@@ -9,12 +9,12 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import { OrderStatus } from "../../models";
+import { EOrderStatus } from "@nx-imfs-17/shared/types";
 
 const orders = [
   {
     id: "1",
-    status: OrderStatus.PENDING,
+    status: EOrderStatus.PENDING,
     created_at: "2021-10-10T00:00:00.000Z",
     items: [
       {
@@ -77,11 +77,11 @@ export async function OrdersPage() {
                   }).format(order.total)}
                 </TableCell>
                 <TableCell>
-                  {order.status === OrderStatus.PENDING ? (
+                  {order.status === EOrderStatus.PENDING ? (
                     <Typography variant="h5" sx={{ color: "warning.main" }}>
                       ⏳
                     </Typography>
-                  ) : order.status === OrderStatus.PAID ? (
+                  ) : order.status === EOrderStatus.PAID ? (
                     <Typography variant="h5" sx={{ color: "success.main" }}>
                       ✔
                     </Typography>

@@ -10,11 +10,11 @@ import {
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import { Total } from "../../../../components/Total";
-import { Order, OrderStatus } from "../../../../models";
+import { type TOrder, EOrderStatus } from "@nx-imfs-17/shared/types";
 
-const order: Order = {
+const order: TOrder = {
   id: "1",
-  status: OrderStatus.PENDING,
+  status: EOrderStatus.PENDING,
   created_at: "2021-10-10T00:00:00.000Z",
   items: [
     {

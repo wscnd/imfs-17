@@ -8,12 +8,12 @@ import {
   Typography,
 } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { OrderStatus } from "../../../models";
+import { EOrderStatus } from "@nx-imfs-17/shared/types";
 import { Total } from "../../../components/Total";
 
 const order = {
   id: "1",
-  status: OrderStatus.PENDING,
+  status: EOrderStatus.PENDING,
   created_at: "2021-10-10T00:00:00.000Z",
   items: [
     {
@@ -70,11 +70,11 @@ async function OrderDetail({ params }: OrderDetailParams) {
                 justifyContent: "center",
               }}
             >
-              {order.status === OrderStatus.PENDING ? (
+              {order.status === EOrderStatus.PENDING ? (
                 <Typography variant="h1" sx={{ color: "warning.main" }}>
                   ⏳
                 </Typography>
-              ) : order.status === OrderStatus.PAID ? (
+              ) : order.status === EOrderStatus.PAID ? (
                 <Typography variant="h1" sx={{ color: "success.main" }}>
                   ✔
                 </Typography>
@@ -85,9 +85,9 @@ async function OrderDetail({ params }: OrderDetailParams) {
               )}
             </Box>
             <Typography variant="h4" sx={{ textAlign: "center" }}>
-              {order.status === OrderStatus.PENDING
+              {order.status === EOrderStatus.PENDING
                 ? "Pedido pendente"
-                : order.status === OrderStatus.PAID
+                : order.status === EOrderStatus.PAID
                 ? "Pedido pago"
                 : "Pedido cancelado"}
             </Typography>
