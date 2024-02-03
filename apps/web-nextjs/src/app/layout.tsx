@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Navbar } from '../components/Navbar/Navbar';
 import theme from '../theme';
+import { SelectCategory } from '../components/Navbar/SelectCategory';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +22,9 @@ export default function RootLayout({
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <div>
-              <Navbar />
+              <Navbar>
+                {({ categories }) => <SelectCategory categories={categories} />}
+              </Navbar>
               <Box
                 component="main"
                 sx={{

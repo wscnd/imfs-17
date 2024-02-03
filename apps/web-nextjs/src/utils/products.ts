@@ -13,7 +13,7 @@ export const useProduct = cache(
       `${process.env.CATALOG_API_URL}/product/${productID}`,
       {
         next: {
-          revalidate: 1,
+          revalidate: 30,
         },
       },
     );
@@ -41,8 +41,8 @@ const cachedProducts = cache(async () => {
 });
 
 type filterProducts = {
-  byProductName: string | null;
-  byCategoryId: string | null;
+  byProductName?: string;
+  byCategoryId?: string;
 };
 
 export const useProducts = async ({

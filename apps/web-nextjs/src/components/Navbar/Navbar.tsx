@@ -1,14 +1,24 @@
 import HomeIcon from '@mui/icons-material/Home';
+import { Suspense } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { SearchBar } from './SearchBar';
-import { SelectCategory } from './SelectCategory';
 import { UserMenu } from './UserMenu';
 import { useCategories } from '../../utils/categories';
+import { TCategory } from '@nx-imfs-17/shared/types';
 
-export async function Navbar() {
+type CategoryProps = {
+  categories: Array<TCategory>;
+};
+
+type WrapperProps = {
+  children?: React.FunctionComponent<CategoryProps>;
+};
+
+export const Navbar: React.FunctionComponent<WrapperProps> = async (props) => {
+  // export async function Navbar({ children }: { children: React.ReactNode }) {
   const categories = await useCategories();
 
   return (
@@ -41,8 +51,7 @@ export async function Navbar() {
           p: 1,
         }}
       >
-        <SelectCategory categories={categories} />
-
+        <Suspense>{props.children && props.children({ categories })}</Suspense>
         <Box
           component={Link}
           href={'/products'}
@@ -59,4 +68,4 @@ export async function Navbar() {
       </Toolbar>
     </AppBar>
   );
-}
+};

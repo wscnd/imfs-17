@@ -3,10 +3,8 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { InputBase, styled } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import { useSearchParams } from 'next/navigation';
-import { useQueryStates, parseAsString } from 'nuqs';
-import { useEffect, useState } from 'react';
-import { searchParsers } from '../../utils/searchParams';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,15 +52,26 @@ interface UsernameFormElement extends HTMLFormElement {
 }
 
 export function SearchBar() {
-  const [names, setName] = useQueryStates(searchParsers);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const [initialValue, setProductName] = useState<string>(
-    names.byProductName || '',
+  const [initialValue] = useState<string>(
+    searchParams.get('byProductName') || '',
   );
 
-  useEffect(() => {
-    setProductName(() => names.byProductName ?? '');
-  }, [names.byProductName]);
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (name === 'byProductName' && value === '') {
+        params.delete('byProductName');
+      } else {
+        params.set(name, value);
+      }
+      return params.toString();
+    },
+    [searchParams],
+  );
 
   return (
     <Search>
@@ -74,8 +83,9 @@ export function SearchBar() {
           event.preventDefault();
           const byProductName =
             event.currentTarget.elements.byProductName.value;
-
-          setName({ byProductName }, { shallow: false });
+          router.push(
+            pathname + '?' + createQueryString('byProductName', byProductName),
+          );
         }}
       >
         <StyledInputBase
