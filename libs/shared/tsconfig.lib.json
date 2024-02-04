@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "../../dist/out-tsc",
+    "declaration": true,
+    "types": [
+      "node"
+    ]
+  },
+  "exclude": [
+    "jest.config.ts",
+    "utils/**/*.spec.ts",
+    "utils/**/*.test.ts"
+  ],
+  "include": [
+    "utils/**/*.ts"
+  ]
+}
