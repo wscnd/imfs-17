@@ -44,15 +44,14 @@ export class OrdersService {
 
     const created = await this.repository.save(order);
     await this.amqpConnection.publish(
-      process.env.RABBITMQ_ORDER_EXCHANGE,
-      process.env.RABBITMQ_ORDER_ROUTING_KEY,
+      process.env.RABBITMQ_EXCHANGE_ORDERS,
+      process.env.RABBITMQ_RK_ORDER_CREATED,
       {
         order_id: order.id,
         card_hash: createOrderDto.card_hash,
         total: order.total,
       },
     );
-
     return created;
   }
 
@@ -66,5 +65,26 @@ export class OrdersService {
 
   async findOne(id: string) {
     return await this.repository.findOneByOrFail({ id });
+  }
+
+  async pay(id: string) {
+    const order = await this.repository.findOneByOrFail({
+      id,
+    });
+
+    order.pay();
+    await this.repository.save(order);
+
+    return order;
+  }
+
+  async fail(id: string) {
+    const order = await this.repository.findOneByOrFail({
+      id,
+    });
+
+    order.fail();
+    await this.repository.save(order);
+    return order;
   }
 }

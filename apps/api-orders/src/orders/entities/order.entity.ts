@@ -6,12 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { OrderItem } from './order-item.entity';
-
-export enum OrderStatus {
-  PENDING = 'pending',
-  PAID = 'paid',
-  FAILED = 'failed',
-}
+import { OrderStatus } from '@nx-imfs-17/shared/types';
 
 @Entity('order')
 export class Order {
@@ -25,8 +20,8 @@ export class Order {
   @Column()
   client_id: number; // usuario autenticado
 
-  @Column()
-  status: OrderStatus = OrderStatus.PENDING;
+  @Column({ type: 'enum', enum: OrderStatus, default: OrderStatus.PENDING })
+  status: OrderStatus;
 
   @CreateDateColumn()
   created_at: Date;
@@ -52,6 +47,30 @@ export class Order {
     }, 0);
 
     return order;
+  }
+
+  pay() {
+    switch (this.status) {
+      case OrderStatus.PAID:
+        throw new Error('order already paid');
+
+      case OrderStatus.FAILED:
+        throw new Error('order failed');
+
+      default:
+        this.status = OrderStatus.PAID;
+    }
+  }
+
+  fail() {
+    switch (this.status) {
+      case OrderStatus.FAILED:
+        throw new Error('order already failed');
+      case OrderStatus.PAID:
+        throw new Error('order already paid');
+      default:
+        this.status = OrderStatus.FAILED;
+    }
   }
 }
 
