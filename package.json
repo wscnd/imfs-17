@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start:web": "nx serve web-nextjs",
-    "start:apis": "nx run-many --target serve --projects=api-orders,api-catalog --parallel --nx-bail=true --maxParallel=100",
+    "start:apis": "nx run-many --target serve --projects=api-orders,api-catalog,api-payment --parallel --nx-bail=true --maxParallel=100",
     "start:all": "pnpm run api:up && pnpm run start:api",
     "serve:images": "pnpm dlx serve -l 9000 ./apps/web-nextjs/images",
     "api:up": "docker compose -f docker-compose.yaml --profile apis up -d",

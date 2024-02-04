@@ -1,0 +1,21 @@
+{
+  "name": "api-payment",
+  "sourceRoot": "apps/api-payment",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go build -o=../../dist/apps/api-payment/api-payment ./cmd/payment/main.go",
+        "cwd": "apps/api-payment"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "air",
+        "cwd": "apps/api-payment"
+      }
+    }
+  }
+}
