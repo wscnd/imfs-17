@@ -67,6 +67,11 @@ export interface ILoginMe {
 
 export interface IRabbitOrderMessage {
   order_id: string;
-  card_hash: string;
-  total: number;
+  status: OrderStatus;
+}
+
+export enum OrderStatus {
+  PENDING = 'pending',
+  PAID = 'paid',
+  FAILED = 'failed',
 }
