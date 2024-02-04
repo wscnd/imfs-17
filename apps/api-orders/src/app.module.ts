@@ -13,12 +13,8 @@ import { Product } from './products/entities/product.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
+      url: process.env.MYSQL_ORDER_DB,
       type: 'mysql',
-      host: 'localhost',
-      port: 3307,
-      username: 'root',
-      password: 'root',
-      database: 'product_db_dev',
       entities: [Product, OrderItem, Order],
       synchronize: true,
       logging: true,

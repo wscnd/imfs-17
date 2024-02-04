@@ -1,5 +1,4 @@
-//TODO: create user
-//
+// TODO: create user
 
 export type TUsers = {
   id: number;

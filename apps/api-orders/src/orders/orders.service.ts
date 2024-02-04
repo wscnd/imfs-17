@@ -43,9 +43,9 @@ export class OrdersService {
     });
 
     const created = await this.repository.save(order);
-    const answer = await this.amqpConnection.publish(
-      'amq.direct',
-      'OrderCreated',
+    await this.amqpConnection.publish(
+      process.env.RABBITMQ_ORDER_EXCHANGE,
+      process.env.RABBITMQ_ORDER_ROUTING_KEY,
       {
         order_id: order.id,
         card_hash: createOrderDto.card_hash,
@@ -53,7 +53,6 @@ export class OrdersService {
       },
     );
 
-    console.log('answer:', answer);
     return created;
   }
 

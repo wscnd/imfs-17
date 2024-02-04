@@ -5,7 +5,7 @@ import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 @Module({
   imports: [
     RabbitMQModule.forRoot(RabbitMQModule, {
-      uri: 'amqp://admin:admin@localhost:5672',
+      uri: process.env.RABBITMQ_URI,
     }),
   ],
   exports: [RabbitMQModule],
