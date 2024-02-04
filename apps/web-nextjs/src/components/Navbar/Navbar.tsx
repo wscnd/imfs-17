@@ -6,8 +6,9 @@ import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { SearchBar } from './SearchBar';
 import { UserMenu } from './UserMenu';
-import { useCategories } from '../../utils/categories';
+import { useCategories } from '../../server-actions/categories.actions';
 import { TCategory } from '@nx-imfs-17/shared/types';
+import { getUserToken } from '../../server-actions/login.actions';
 
 type CategoryProps = {
   categories: Array<TCategory>;
@@ -18,8 +19,8 @@ type WrapperProps = {
 };
 
 export const Navbar: React.FunctionComponent<WrapperProps> = async (props) => {
-  // export async function Navbar({ children }: { children: React.ReactNode }) {
   const categories = await useCategories();
+  const user = await getUserToken();
 
   return (
     <AppBar position="fixed">
@@ -41,7 +42,7 @@ export const Navbar: React.FunctionComponent<WrapperProps> = async (props) => {
         <IconButton LinkComponent={Link} size="large" href="/cart">
           <ShoppingCartIcon />
         </IconButton>
-        <UserMenu user={{}} />
+        <UserMenu user={user} />
       </Toolbar>
       <Toolbar
         sx={{

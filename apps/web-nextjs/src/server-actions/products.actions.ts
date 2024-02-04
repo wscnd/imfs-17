@@ -1,14 +1,16 @@
+'use server';
+import 'server-only';
 import type { TProduct } from '@nx-imfs-17/shared/types';
 import { cache } from 'react';
-import 'server-only';
+import { getCartFromCookies } from './cookies.actions';
 
 export const preloadProducts = (id: string) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  void useProduct(id);
+  void findProductById(id);
 };
 
-export const useProduct = cache(
+export const findProductById = cache(
   async (productID: string): Promise<TProduct> => {
+    'use server';
     const response = await fetch(
       `${process.env.CATALOG_API_URL}/product/${productID}`,
       {
@@ -45,7 +47,7 @@ type filterProducts = {
   byCategoryId?: string;
 };
 
-export const useProducts = async ({
+export const getProductsBy = async ({
   byCategoryId,
   byProductName,
 }: filterProducts) => {
@@ -65,3 +67,9 @@ export const useProducts = async ({
 
   return products;
 };
+
+export const getProductsFromCookies = cache(async () => {
+  const { cart } = await getCartFromCookies();
+
+  return Object.entries(cart.items).map(([, details]) => [details]);
+});

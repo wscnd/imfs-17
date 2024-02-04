@@ -6,90 +6,58 @@ import {
   TableHead,
   TableRow,
   Typography,
-} from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { EOrderStatus } from "@nx-imfs-17/shared/types";
-import { Total } from "../../../components/Total";
+} from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { EOrderStatus } from '@nx-imfs-17/shared/types';
+import { Total } from '../../../components/Total';
+import { findOrderById } from '../../../server-actions/order.actions';
 
-const order = {
-  id: "1",
-  status: EOrderStatus.PENDING,
-  created_at: "2021-10-10T00:00:00.000Z",
-  items: [
-    {
-      id: 1,
-      product: {
-        id: "1",
-        name: "Camisa",
-        description: "Camisa branca",
-        price: 100,
-        image_url: "https://source.unsplash.com/random?product",
-        category_id: "1",
-      },
-      quantity: 2,
-      price: 100,
-    },
-    {
-      id: 2,
-      product: {
-        id: "2",
-        name: "Calça",
-        description: "Calça jeans",
-        price: 100,
-        image_url: "https://source.unsplash.com/random?product",
-        category_id: "1",
-      },
-      quantity: 1,
-      price: 100,
-    },
-  ],
-  total: 1000,
-};
-
-type OrderDetailParams = {
+type OrderIdPageParams = {
   params: {
     orderId: string;
   };
 };
 
-async function OrderDetail({ params }: OrderDetailParams) {
+async function OrderIdPage({ params }: OrderIdPageParams) {
+  const order = await findOrderById(params.orderId);
+
   return (
     <Box>
       <Grid2 container spacing={2}>
         <Grid2 xs={12} md={6}>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
             }}
           >
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
+                display: 'flex',
+                justifyContent: 'center',
               }}
             >
               {order.status === EOrderStatus.PENDING ? (
-                <Typography variant="h1" sx={{ color: "warning.main" }}>
+                <Typography variant="h1" sx={{ color: 'warning.main' }}>
                   ⏳
                 </Typography>
               ) : order.status === EOrderStatus.PAID ? (
-                <Typography variant="h1" sx={{ color: "success.main" }}>
+                <Typography variant="h1" sx={{ color: 'success.main' }}>
                   ✔
                 </Typography>
               ) : (
-                <Typography variant="h1" sx={{ color: "error.main" }}>
+                <Typography variant="h1" sx={{ color: 'error.main' }}>
                   ✖
                 </Typography>
               )}
             </Box>
-            <Typography variant="h4" sx={{ textAlign: "center" }}>
+            <Typography variant="h4" sx={{ textAlign: 'center' }}>
               {order.status === EOrderStatus.PENDING
-                ? "Pedido pendente"
+                ? 'Pedido pendente'
                 : order.status === EOrderStatus.PAID
-                ? "Pedido pago"
-                : "Pedido cancelado"}
+                  ? 'Pedido pago'
+                  : 'Pedido cancelado'}
             </Typography>
           </Box>
         </Grid2>
@@ -110,18 +78,18 @@ async function OrderDetail({ params }: OrderDetailParams) {
                     <TableCell>{item.product.name}</TableCell>
                     <TableCell>{item.quantity}</TableCell>
                     <TableCell>
-                      {new Intl.NumberFormat("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      }).format(item.product.price)}
+                      {new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      }).format(parseInt(item.price))}
                     </TableCell>
                   </TableRow>
                 );
               })}
               <TableRow>
                 <TableCell colSpan={3}>
-                  <Box sx={{ display: "flex", justifyContent: "end" }}>
-                    <Total total={order.total} />
+                  <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+                    <Total total={parseInt(order.total)} />
                   </Box>
                 </TableCell>
               </TableRow>
@@ -133,4 +101,4 @@ async function OrderDetail({ params }: OrderDetailParams) {
   );
 }
 
-export default OrderDetail;
+export default OrderIdPage;

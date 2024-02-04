@@ -1,4 +1,3 @@
-
 import {
   Box,
   Divider,
@@ -8,50 +7,18 @@ import {
   TableHead,
   TableRow,
   Typography,
-} from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { redirect } from "next/navigation";
-import { Total } from "../../components/Total";
-import { CheckoutForm } from "./CheckoutForm";
-
-const products = [
-    {
-      id: "1",
-      name: "Camisa",
-      description: "Camisa branca",
-      price: 100,
-      image_url: "https://source.unsplash.com/random?product",
-      category_id: "1",
-    },
-    {
-      id: "2",
-      name: "Calça",
-      description: "Calça jeans",
-      price: 100,
-      image_url: "https://source.unsplash.com/random?product",
-      category_id: "1",
-    },
-  ];
-
-  const cart = {
-    items: [
-      {
-        product_id: "1",
-        quantity: 2,
-        total: 200,
-      },
-      {
-        product_id: "2",
-        quantity: 1,
-        total: 100,
-      },
-    ],
-    total: 1000,
-  };
+} from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { redirect } from 'next/navigation';
+import { Total } from '../../components/Total';
+import { CheckoutForm } from './CheckoutForm';
+import { getProductsFromCookies } from '../../server-actions/products.actions';
 
 async function CheckoutPage() {
-  if (cart.items.length === 0) {
-    return redirect("/cart");
+  const products = await getProductsFromCookies();
+
+  if (products.length === 0) {
+    return redirect('/cart');
   }
 
   return (
@@ -75,27 +42,32 @@ async function CheckoutPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {cart.items.map((item, key) => {
-                const product = products.find(
-                  (product) => product.id == item.product_id
-                )!;
+              {products.map(([product]) => {
                 return (
-                  <TableRow key={key}>
+                  <TableRow key={product.id}>
                     <TableCell>{product.name}</TableCell>
-                    <TableCell>{item.quantity}</TableCell>
+                    <TableCell>{product.quantity}</TableCell>
                     <TableCell>
-                      {new Intl.NumberFormat("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      }).format(item.total)}
+                      {new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      }).format(product.quantity * product.price)}
                     </TableCell>
                   </TableRow>
                 );
               })}
               <TableRow>
                 <TableCell colSpan={3}>
-                  <Box sx={{ display: "flex", justifyContent: "end" }}>
-                    <Total total={cart.total} />
+                  <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+                    <Total
+                      total={
+                        products?.reduce(
+                          (sum, [{ quantity, price }]) =>
+                            sum + quantity * price,
+                          0,
+                        ) ?? 0
+                      }
+                    />
                   </Box>
                 </TableCell>
               </TableRow>

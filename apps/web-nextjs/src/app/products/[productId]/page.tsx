@@ -4,7 +4,7 @@ import { Box, Card, CardContent, Typography } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import Image from 'next/legacy/image';
 import { ProductQuantityForm } from './ProductQuantityForm';
-import { useProduct } from '../../../utils/products';
+import { findProductById } from '../../../server-actions/products.actions';
 
 type ProductDetailPageParams = {
   params: {
@@ -15,7 +15,7 @@ type ProductDetailPageParams = {
 async function ProductDetailPage({
   params: { productId },
 }: ProductDetailPageParams) {
-  const product = await useProduct(productId);
+  const product = await findProductById(productId);
 
   return (
     <Grid2 container spacing={2}>

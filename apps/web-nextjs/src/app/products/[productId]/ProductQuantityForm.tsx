@@ -1,23 +1,26 @@
-"use client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Box, Button, Divider, Slider, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
-import { Total } from "../../../components/Total";
-import { TProduct } from "@nx-imfs-17/shared/types";
+'use client';
+import { zodResolver } from '@hookform/resolvers/zod';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Box, Button, Divider, Slider, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Total } from '../../../components/Total';
+import { TProduct } from '@nx-imfs-17/shared/types';
+import { addToCart } from '../../../server-actions/cart.actions';
 
 const productFormSchema = z.object({
   product_id: z.string().uuid(),
   quantity: z.number().int().min(1),
 });
+
 type ProductFormValues = z.infer<typeof productFormSchema>;
 
 type ProductQuantityFormProps = {
   product: TProduct;
 };
+
 export function ProductQuantityForm({ product }: ProductQuantityFormProps) {
   const { control, register, getValues, watch } = useForm<ProductFormValues>({
     resolver: zodResolver(productFormSchema),
@@ -31,7 +34,7 @@ export function ProductQuantityForm({ product }: ProductQuantityFormProps) {
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
-      if (name === "quantity" || name?.includes("attributes")) {
+      if (name === 'quantity' || name?.includes('attributes')) {
         setTotal(product.price * getValues().quantity);
       }
     });
@@ -39,27 +42,23 @@ export function ProductQuantityForm({ product }: ProductQuantityFormProps) {
   }, [watch, product, getValues]);
 
   return (
-    <Box component="form" sx={{ p: 1 }}>
+    <Box component="form" sx={{ p: 1 }} action={addToCart}>
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: 'flex' }}>
           <SettingsSuggestIcon />
           <Typography variant="h6">Configure sua compra</Typography>
         </Box>
-        <Box display={{ xs: "none", md: "block" }}>
+        <Box display={{ xs: 'none', md: 'block' }}>
           <Total total={total} />
         </Box>
       </Box>
-      <input
-        type="hidden"
-        value={product.id}
-        {...register("product_id")}
-      />
+      <input type="hidden" value={product.id} {...register('product_id')} />
       <Controller
         name="quantity"
         control={control}
@@ -80,7 +79,7 @@ export function ProductQuantityForm({ product }: ProductQuantityFormProps) {
         )}
       />
       <Divider sx={{ mt: 2 }} />
-      <Box sx={{ display: "flex", justifyContent: "end", mt: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'end', mt: 2 }}>
         <Button type="submit" sx={{ mt: 3 }} startIcon={<ShoppingCartIcon />}>
           Colocar no carrinho
         </Button>

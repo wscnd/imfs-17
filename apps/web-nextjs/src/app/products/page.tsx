@@ -11,7 +11,7 @@ import {
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import Grid2 from '@mui/material/Unstable_Grid2';
-import { useProducts } from '../../utils/products';
+import { getProductsBy } from '../../server-actions/products.actions';
 import React from 'react';
 
 type SearchParams = {
@@ -24,7 +24,7 @@ type SearchParams = {
 async function ListProductsPage({
   searchParams: { byCategoryId, byProductName },
 }: SearchParams) {
-  const products = await useProducts({ byCategoryId, byProductName });
+  const products = await getProductsBy({ byCategoryId, byProductName });
 
   return (
     <Grid2 container spacing={2}>

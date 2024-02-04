@@ -1,13 +1,13 @@
+'use server';
+import 'server-only';
 import type { TCategory } from '@nx-imfs-17/shared/types';
 import { cache } from 'react';
-import 'server-only';
 
 export const preloadCategories = (id: string) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  void useCategory(id);
+  void findCategoryById(id);
 };
 
-export const useCategory = cache(
+export const findCategoryById = cache(
   async (categoryID: string): Promise<TCategory> => {
     const response = await fetch(
       `${process.env.CATALOG_API_URL}/category/${categoryID}`,
@@ -33,7 +33,6 @@ export const useCategories = cache(async () => {
   }
 
   const categories: Array<TCategory> = await response.json();
-
   if (!categories.length) {
     return [];
   }
