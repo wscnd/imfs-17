@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/wscnd/nx-imfs-17/catalogapi/internal/models"
+	"github.com/wscnd/nx-imfs-17/catalog/internal/models"
 )
 
 func (ch *CategoryHandler) CreateOne(w http.ResponseWriter, r *http.Request) {

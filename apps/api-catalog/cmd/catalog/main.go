@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/wscnd/nx-imfs-17/catalogapi/internal/handler"
+	"github.com/wscnd/nx-imfs-17/catalog/internal/handler"
 )
 
 func main() {

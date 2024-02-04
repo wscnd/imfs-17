@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/wscnd/nx-imfs-17/catalogapi/internal/models"
-	"github.com/wscnd/nx-imfs-17/catalogapi/internal/repository"
+	"github.com/wscnd/nx-imfs-17/catalog/internal/models"
+	"github.com/wscnd/nx-imfs-17/catalog/internal/repository"
 )
 
 type ProductService struct {

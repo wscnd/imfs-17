@@ -1,4 +1,4 @@
-module github.com/wscnd/nx-imfs-17/catalogapi
+module github.com/wscnd/nx-imfs-17/catalog
 
 go 1.21.6
 

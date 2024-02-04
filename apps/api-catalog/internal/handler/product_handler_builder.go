@@ -1,6 +1,6 @@
 package handler
 
-import "github.com/wscnd/nx-imfs-17/catalogapi/internal/service"
+import "github.com/wscnd/nx-imfs-17/catalog/internal/service"
 
 type ProductHandler struct {
 	ProductService *service.ProductService

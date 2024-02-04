@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 
-	"github.com/wscnd/nx-imfs-17/catalogapi/internal/models"
+	"github.com/wscnd/nx-imfs-17/catalog/internal/models"
 )
 
 type CategoryRepository struct {

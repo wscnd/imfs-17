@@ -7,9 +7,9 @@
 package handler
 
 import (
-	"github.com/wscnd/nx-imfs-17/catalogapi/internal/database"
-	"github.com/wscnd/nx-imfs-17/catalogapi/internal/repository"
-	"github.com/wscnd/nx-imfs-17/catalogapi/internal/service"
+	"github.com/wscnd/nx-imfs-17/catalog/internal/database"
+	"github.com/wscnd/nx-imfs-17/catalog/internal/repository"
+	"github.com/wscnd/nx-imfs-17/catalog/internal/service"
 )
 
 // Injectors from wire.go:
