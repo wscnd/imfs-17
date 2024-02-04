@@ -20,7 +20,7 @@ func main() {
 	{
 		c.Use(middleware.Logger)
 		c.Use(middleware.Recoverer)
-		// NOTE set content-type to JSON
+
 		c.Use(func(next http.Handler) http.Handler {
 			return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				w.Header().Set("Content-Type", "application/json")
@@ -47,6 +47,7 @@ func main() {
 	}
 
 	fmt.Printf("server is running on port %s", host)
+
 	http.ListenAndServe(host, c)
 }
 

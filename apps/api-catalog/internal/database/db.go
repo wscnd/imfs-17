@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"os"
 	"sync"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -16,7 +17,7 @@ var (
 func Must() (*sql.DB, func()) {
 	once.Do(func() {
 		dbType := "mysql"
-		dbURL := "root:root@tcp(localhost:3306)/catalog_db"
+		dbURL := os.Getenv("MYSQL_CATALOG_DB")
 		conn, err := sql.Open(dbType, dbURL)
 		if err != nil {
 			panic(err)
