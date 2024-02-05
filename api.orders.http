@@ -27,13 +27,9 @@ Authorization: {{bearer_token}}
   "items": [
     {
       "product_id": "04c4353a-3f6d-4272-a8f2-44b82c05ecc0",
-      "quantity": 1
-    },
-    {
-      "product_id": "0afa7630-4fc1-4d69-beed-4f8f15becadc",
-      "quantity": 1
+      "quantity": 2
     }
-  ],
+      ],
   "card_hash": "321321"
 }
 
