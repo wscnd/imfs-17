@@ -11,7 +11,9 @@
     "api:down": "docker compose -f docker-compose.yaml --profile apis down",
     "lint": "nx affected --target=lint --fix",
     "fixture:insert": "ts-node --project ./apps/api-orders/tsconfig.bootstrap.json -r tsconfig-paths/register \"./apps/api-orders/src/db_fixture_insert.ts\"",
-    "wire": "wire ./apps/api-catalog/... "
+    "wire:catalog": "wire ./apps/api-catalog/... ",
+    "wire:payment": "wire ./apps/api-payment/... ",
+    "wire": "pnpm run wire:catalog && pnpm run wire:payment"
   },
   "private": true,
   "devDependencies": {
